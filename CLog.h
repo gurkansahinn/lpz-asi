@@ -3,5 +3,5 @@
 class CLog
 {
 public:
-	static void SendServerInfo(std::string serverIp);
+	static void SendInfoMessage(std::string messageInfo);
 };

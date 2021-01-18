@@ -27,9 +27,13 @@ void CCmdlineParams::ProcessSubstr(std::string strSubstr)
 	std::pair<std::string, std::string> pair;
 	size_t pos = strSubstr.find(' ');
 	if (pos != std::string::npos)
+	{
 		pair = std::pair<std::string, std::string>(strSubstr.substr(0, pos), strSubstr.substr(pos + 1));
+	}
 	else
+	{
 		pair = std::pair<std::string, std::string>(strSubstr, "");
+	}
 
 	m_paramMap.insert(pair);
 }
