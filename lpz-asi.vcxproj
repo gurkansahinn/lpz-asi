@@ -94,6 +94,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CCmdlineParams.cpp" />
+    <ClCompile Include="CLog.cpp" />
     <ClCompile Include="lpzasi.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,7 @@
   <ItemGroup>
     <ClInclude Include="CCmdlineParams.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="CLog.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
