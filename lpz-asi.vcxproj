@@ -97,12 +97,14 @@
     <ClCompile Include="CLog.cpp" />
     <ClCompile Include="CMem.cpp" />
     <ClCompile Include="lpzasi.cpp" />
+    <ClCompile Include="CHud.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="lpz-asi.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCmdlineParams.h" />
+    <ClInclude Include="CHud.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="CLog.h" />
     <ClInclude Include="CMem.h" />

@@ -4,16 +4,31 @@
 #include "CCmdlineParams.h"
 #include "CLog.h"
 #include "CMem.h"
+#include "CHud.h"
 
-using namespace plugin;
+BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID lpReserved)
+{
+	switch (dwReason)
+	{
+	case DLL_PROCESS_ATTACH:
+		AllocConsole();
+		CCmdlineParams::Process(GetCommandLine());
 
-class lpzasi {
-public:
-    lpzasi() {
-        AllocConsole();
-        CCmdlineParams::Process(GetCommandLine());
+		CLog::SendInfoMessage(CCmdlineParams::GetArgumentValue(SAMP_PARAM_ADDRESS) + " ip adresli sunucuya bağlanıyorsun.");
 
-        std::string messageInfo = CCmdlineParams::GetArgumentValue(SAMP_PARAM_ADDRESS) + " ip adresli sunucuya bağlanıyorsun.";
-        CLog::SendInfoMessage(messageInfo);
-    }
-} _lpzasi;
+		CHUD::Initialize();
+
+		// Hide All Hud Component
+		CHUD::ToggleComponent(ALL, false);
+
+		// Show PlayerCrosshair
+		CHUD::ToggleComponent(CROSSHAIR, true);
+		break;
+
+	case DLL_PROCESS_DETACH:
+		// veriler silinecek
+		break;
+
+	}
+	return TRUE;
+}
