@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Client.h"
-
 enum eHUDComponent : unsigned char
 {
 	ALL,

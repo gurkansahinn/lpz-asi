@@ -1,4 +1,4 @@
-#include "Client.h"
+#include <Windows.h>
 #include "CCmdlineParams.h"
 
 std::map<std::string, std::string> CCmdlineParams::m_paramMap;

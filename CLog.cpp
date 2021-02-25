@@ -1,6 +1,6 @@
 #include <string>
+#include <Windows.h>
 
-#include "Client.h"
 #include "CLog.h"
 
 void CLog::SendInfoMessage(std::string messageInfo)
