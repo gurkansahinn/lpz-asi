@@ -2,4 +2,4 @@
 LPZ GTA:SA asi source code.
 
 
-Credits: Hual(SAMP-PLUS), Amper
+Credits: Hual(SAMP-PLUS), Amper, Glorfin
