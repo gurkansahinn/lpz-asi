@@ -25,10 +25,10 @@
 
 namespace LPZ
 {
+    int sock = 0;
+
 	void Connect()
 	{
-        int sock = 0;
-
         struct sockaddr_in serv_addr;
 
         char buffer[1024] = { 0 };
@@ -65,6 +65,6 @@ namespace LPZ
 
 	void Disconnect()
 	{
-		// baðlantý koptuðunda sunucudan ayrýlacak, oyun kapatýlacak
+        closesocket(sock);
 	}
 };
