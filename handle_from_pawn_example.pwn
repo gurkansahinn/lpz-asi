@@ -9,6 +9,7 @@ enum ASI_USER_INFO
 {
 	name[24],
 	hwid[40],
+	timer,
 	onUse
 };
 
@@ -84,7 +85,7 @@ public onSocketReceiveData(Socket:id, remote_clientid, data[], data_len)
 		ASI_DATA[next()][name] = l_name;
 		ASI_DATA[next()][hwid] = l_hwid;
 		
-		printf("%s --- %s", l_name, l_hwid);
+	    ASI_DATA[next()][timer] = SetTimerEx("set_free", 10000, false, "d", next());
 	}
 	return 1;
 }
@@ -95,6 +96,7 @@ is_using_asi(playerid)
 	{
         if(strfind(ASI_DATA[i][name], get_name(playerid), true) != -1)
         {
+            KillTimer(ASI_DATA[i][timer]);
 			set_free(i);
             return 1;
         }
@@ -114,7 +116,8 @@ next()
 	return -1;
 }
 
-set_free(index)
+forward set_free(index);
+public set_free(index)
 {
 	ASI_DATA[index][onUse] = false;
 	ASI_DATA[index][name] = EOS;
