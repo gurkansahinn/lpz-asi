@@ -54,17 +54,22 @@ namespace LPZ
             return;
         }
         
-        char data[72 + 1];
-        std::string name = "LPZ_NICK_HASH:" + CCmdlineParams::GetArgumentValue(SAMP_PARAM_UNAME);
+        HW_PROFILE_INFO hwProfileInfo;
+        GetCurrentHwProfile(&hwProfileInfo);
+        
+        char data[24 + 15 + 35];
+        std::string name = "LPZ_NICK_HASH" + CCmdlineParams::GetArgumentValue(SAMP_PARAM_UNAME) + ":" + hwProfileInfo.szHwProfileGuid;
 
         strcpy(data, name.c_str());
 
         send(sock, data, 72 + 1, 0);
         CLog::SendInfoMessage("LPZ sunucularýna baþarýyla baðlandýn.\nOyuna giriþ yapýyorsun.");
+
+        closesocket(sock);
 	}
 
 	void Disconnect()
 	{
-        closesocket(sock);
-	}
+        // plugin söküldüðünde
+    }
 };

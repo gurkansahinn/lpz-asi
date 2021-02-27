@@ -8,10 +8,13 @@ main(){}
 enum ASI_USER_INFO
 {
 	name[24],
+	hwid[40],
 	onUse
 };
 
-new Socket: server, ASI_DATA[MAX_CONNECTIONS][ASI_USER_INFO];
+new
+	Socket: server,
+	ASI_DATA[MAX_CONNECTIONS][ASI_USER_INFO];
 
 public OnGameModeInit()
 {
@@ -28,7 +31,6 @@ public OnGameModeInit()
  	{
  	    SendRconCommand("gmx");
 	}
- 	
 	return 1;
 }
 
@@ -42,11 +44,13 @@ public OnPlayerConnect(playerid)
 {
  	if(!is_using_asi(playerid))
  	{
- 	    Kick(playerid);
+		SendClientMessage(playerid, 0xB86654FF, "LPZ-ASI kullanmadýðýný tespit ettik. Eðer dosyalarýnda varsa eski bir sürümü kullanýyor olabilirsin.");
+		SendClientMessage(playerid, 0xB86654FF, "ASI dosyasýný yükleyebilir veya güncelleyebilirsin. Böylece oyuna giriþ yapabilirsin. Þimdilik oyundan atýlýyorsun.");
+		Kick(playerid);
  	}
  	else
 	{
-	    SendClientMessage(playerid, -1, "LPZ-ASI kullandýðýný tespit ettik. Sunucuda oynayabilirsin, keyifli oyunlar.");
+	    SendClientMessage(playerid, 0xB86654FF, "LPZ-ASI kullandýðýný tespit ettik, sunucuda oynayabilirsin. Keyifli oyunlar dileriz.");
 	}
  	
 	return 1;
@@ -60,15 +64,28 @@ public onSocketClose(Socket:id)
 
 public onSocketReceiveData(Socket:id, remote_clientid, data[], data_len)
 {
-	strdel(data, 0, 14);
-	
-	new
-		buff[24];
+	if(id == server)
+	{
+		strdel(data, 0, 13);
+
+		new
+			l_name[24],
+			l_hwid[40],
+			hwid_index = strfind(data, ":", true);
+
+
+		format(l_name, 24, "%s", data);
+  		strdel(l_name, hwid_index, 50);
+  		
+		strdel(data, 0, hwid_index + 1);
+		format(l_hwid, 40, "%s", data);
+
+		ASI_DATA[next()][onUse] = true;
+		ASI_DATA[next()][name] = l_name;
+		ASI_DATA[next()][hwid] = l_hwid;
 		
-	format(buff, 24, "%s", data);
-	
-	ASI_DATA[next()][onUse] = true;
-	ASI_DATA[next()][name] = buff;
+		printf("%s --- %s", l_name, l_hwid);
+	}
 	return 1;
 }
 
@@ -101,6 +118,7 @@ set_free(index)
 {
 	ASI_DATA[index][onUse] = false;
 	ASI_DATA[index][name] = EOS;
+	ASI_DATA[index][hwid] = EOS;
 	return 1;
 }
 
