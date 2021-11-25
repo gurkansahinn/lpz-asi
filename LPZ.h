@@ -45,8 +45,8 @@ namespace LPZ
         discordPresence.details = uName;
         discordPresence.largeImageKey = "lastz";
         discordPresence.largeImageText = "Last Project Z";
-        discordPresence.partyId = "ae488379-351d-4a4f-ad32-2b9b01c91657";
-        discordPresence.joinSecret = "MTI4NzM0OjFpMmhuZToxMjMxMjM= ";
+        discordPresence.partyId = "PARTYID";
+        discordPresence.joinSecret = "SECRETID";
         Discord_UpdatePresence(&discordPresence);
     }
 
@@ -58,7 +58,7 @@ namespace LPZ
 
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         {
-            CLog::SendInfoMessage("\n Socket baðlantýsý kurulamadý. \n");
+            CLog::SendInfoMessage("\n Socket baÃ°lantÃ½sÃ½ kurulamadÃ½. \n");
             return;
         }
 
@@ -67,13 +67,13 @@ namespace LPZ
 
         if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0)
         {
-            CLog::SendInfoMessage("LPZ adresinde hata olduðundan baðlantý saðlanamadý.");
+            CLog::SendInfoMessage("LPZ adresinde hata olduÃ°undan baÃ°lantÃ½ saÃ°lanamadÃ½.");
             return;
         }
 
         if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)
         {
-            CLog::SendInfoMessage("\nLPZ sunucularýna baðlanýrken sorun yaþandý. \n");
+            CLog::SendInfoMessage("\nLPZ sunucularÃ½na baÃ°lanÃ½rken sorun yaÃ¾andÃ½. \n");
             return;
         }
         
@@ -86,7 +86,7 @@ namespace LPZ
         strcpy(data, name.c_str());
 
         send(sock, data, 72 + 1, 0);
-        CLog::SendInfoMessage("LPZ sunucularýna baþarýyla baðlandýn.\nOyuna giriþ yapýyorsun.");
+        CLog::SendInfoMessage("LPZ sunucularÃ½na baÃ¾arÃ½yla baÃ°landÃ½n.\nOyuna giriÃ¾ yapÃ½yorsun.");
 	}
 
 	void Disconnect()
